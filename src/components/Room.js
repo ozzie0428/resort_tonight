@@ -4,7 +4,7 @@ import defaultImg from "../images/room-1.jpeg"
 import Proptypes from "prop-types"
 export default function Room({room}) {
     const{name,slug,images,price} = room;
-console.log("room", room)
+// console.log("room", room)
 
     return (
         <article className="room">
