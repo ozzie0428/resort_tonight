@@ -58,42 +58,52 @@ export default class RoomProvider extends Component {
   };
   handleChange = event => {
     const target = event.target;
-    const value = event.type === 'checkbox' ? target.checked:target.value;
+    const value = event.type === "checkbox" ? target.checked : target.value;
     const name = event.target.name;
-    this.setState({
-      [name]:value
-    },this.filterRooms)
+    this.setState(
+      {
+        [name]: value
+      },
+      this.filterRooms
+    );
     // console.log("HANDLE CHANGE", type, name, value);
   };
   filterRooms = () => {
-   let{
-     rooms,type,capacity,price,minSize,maxSize,breakfast,pets
-   } = this.state
-  //  all the rooms
-   let tempRooms = [...rooms]
-// transform value
-capacity =parseInt(capacity)
+    let {
+      rooms,
+      type,
+      capacity,
+      price,
+      minSize,
+      maxSize,
+      breakfast,
+      pets
+    } = this.state;
+    //  all the rooms
+    let tempRooms = [...rooms];
+    // transform value
+    capacity = parseInt(capacity);
 
+    // filter by type
+    if (type !== "all") {
+      tempRooms = tempRooms.filter(room => room.type === type);
+    }
 
-// filter by type
-   if(type !== 'all'){
-     tempRooms = tempRooms.filter(room => room.type === type)
-   }
-
-  //  filter by capacity
-  if(capacity !==1){
-    tempRooms = tempRooms.filter(room => room.capacity >= capacity)
-  }
-   this.setState({
-     sortedRooms:tempRooms
-   })
+    //  filter by capacity
+    if (capacity !== 1) {
+      tempRooms = tempRooms.filter(room => room.capacity >= capacity);
+    }
+    this.setState({
+      sortedRooms: tempRooms
+    });
   };
   render() {
     return (
       <RoomContext.Provider
         value={{
           ...this.state,
-          getRoom: this.getRoom, handleChange: this.handleChange
+          getRoom: this.getRoom,
+          handleChange: this.handleChange
         }}
       >
         {this.props.children}
