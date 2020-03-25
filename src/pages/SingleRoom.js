@@ -9,7 +9,7 @@ import StyledHero from "../components/StyledHero";
 export default class SingleRoom extends Component {
   constructor(props) {
     super(props);
-    console.log("SINGLE PROPS", this.props.match.params);
+    // console.log("SINGLE PROPS", this.props.match.params);
     this.state = {
       slug: this.props.match.params.slug,
       defaultBcg
@@ -21,10 +21,10 @@ export default class SingleRoom extends Component {
   // }
   render() {
     const { getRoom } = this.context;
-    console.log("CONTEXT", getRoom);
+    // console.log("CONTEXT", getRoom);
     const room = getRoom(this.state.slug);
-    console.log("STATE", this.state);
-    console.log("singleroom", room);
+    // console.log("STATE", this.state);
+    // console.log("singleroom", room);
     if (!room) {
       return (
         <div className="error">
@@ -76,21 +76,23 @@ export default class SingleRoom extends Component {
         <h6>Max capacity: {
           capacity > 1 ? `${capacity} people` :
           `${capacity} person` 
-          }</h6>
+          }
+          </h6>
           <h6>{pets?"Pets Allowed" : "No pets allowed"}</h6>
           <h6>{breakfast && "Free Breakfast Included"}</h6>
+          </article>
+          </div>
+          </section>
           <section className="room-extras">
           <h6>Extras</h6>
           <ul className="extras">
-             {extras.map((item,index)=>{
-               return <li key={index}>- {item}</li>
-             })}
+             {extras.map((item,index)=>(
+               <li key={index}>- {item}</li>
+             ))}
           </ul>
           </section>
-        </article>
-        </div>
-      
-      </section>
+        
+    
       </>
     );
   }
